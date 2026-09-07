@@ -63,6 +63,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 body {
@@ -73,6 +74,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100vw;
+}
+
+.offcanvas:not(.show) {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1353,6 +1360,143 @@ a:hover {
   }
 }
 
+/* ==========================================================================
+   City & Search Discovery Page (city.html) Styles
+   ========================================================================== */
+
+.city-hero-banner {
+  background: radial-gradient(circle at 90% 10%, #fff3e0 0%, #ffffff 60%);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 2.5rem 0 2rem 0;
+}
+
+.custom-breadcrumb {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.custom-breadcrumb a {
+  color: var(--text-muted);
+}
+
+.custom-breadcrumb a:hover {
+  color: var(--primary);
+}
+
+.custom-breadcrumb .breadcrumb-item.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.locality-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.locality-chip {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.locality-chip:hover, .locality-chip.active {
+  background-color: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Filter Sidebar */
+.filter-sidebar-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 90px;
+}
+
+.filter-group-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.form-check-custom {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-check-input:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Results Toolbar */
+.results-toolbar {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.view-toggle-btn-group .btn {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.view-toggle-btn-group .btn.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* Split Map Layout on City Page */
+.split-map-view {
+  position: sticky;
+  top: 90px;
+  height: calc(100vh - 120px);
+  min-height: 500px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Provider List View Layout */
+.provider-card.list-layout {
+  flex-direction: row;
+}
+
+.provider-card.list-layout .provider-thumb-wrap {
+  width: 220px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .provider-card.list-layout {
+    flex-direction: column;
+  }
+  .provider-card.list-layout .provider-thumb-wrap {
+    width: 100%;
+    height: 180px;
+  }
+}
+
 /* Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1362,3 +1506,4 @@ a:hover {
     scroll-behavior: auto !important;
   }
 }
+

@@ -273,7 +273,7 @@ const app = {
         targetSection.scrollIntoView({ behavior: 'smooth' });
       }
 
-      this.showLocationFeedback(`Showing tiffin services delivering in "${query}". (Prepared for route: ?search=${encodeURIComponent(query)})`, "success");
+      this.showLocationFeedback(`Showing tiffin services delivering in "${query}". <a href="city.html?city=${encodeURIComponent(query)}" class="btn btn-primary-custom btn-sm ms-2 py-1 px-3" style="font-size: 0.78rem;">Explore Full ${query} Directory & Filters →</a>`, "success");
     });
 
     // Clear feedback when typing
@@ -910,19 +910,7 @@ const app = {
       const modal = bootstrap.Modal.getInstance(modalEl);
       if (modal) modal.hide();
     }
-
-    const input = document.getElementById('searchLocationInput');
-    if (input) input.value = city;
-
-    this.currentLocationQuery = city;
-    this.filterAndDisplayProviders(city);
-
-    const targetSection = document.getElementById('popularProvidersSection');
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    this.showToast(`Selected city: ${city}`);
+    window.location.href = `city.html?city=${encodeURIComponent(city)}`;
   },
 
   /**
@@ -951,19 +939,7 @@ const app = {
       const modal = bootstrap.Modal.getInstance(modalEl);
       if (modal) modal.hide();
     }
-
-    const input = document.getElementById('searchLocationInput');
-    if (input) input.value = state;
-
-    this.currentLocationQuery = state;
-    this.filterAndDisplayProviders(state);
-
-    const targetSection = document.getElementById('popularProvidersSection');
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    this.showToast(`Selected state: ${state}`);
+    window.location.href = `city.html?city=${encodeURIComponent(state)}`;
   },
 
   /**
