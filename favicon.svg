@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="twGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7043"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <rect width="64" height="64" rx="16" fill="url(#twGrad)"/>
+  
+  <!-- Dabba / Tiffin Stack Outline -->
+  <!-- Top Handle -->
+  <path d="M26 12 C26 8, 38 8, 38 12" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Handle Vertical Rods -->
+  <line x1="20" y1="18" x2="20" y2="48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <line x1="44" y1="18" x2="44" y2="48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  
+  <!-- Tier 1 (Top Container) -->
+  <rect x="22" y="16" width="20" height="9" rx="2.5" fill="#ffffff"/>
+  <!-- Tier 2 (Middle Container) -->
+  <rect x="22" y="27" width="20" height="9" rx="2.5" fill="#ffffff"/>
+  <!-- Tier 3 (Bottom Container) -->
+  <rect x="22" y="38" width="20" height="9" rx="2.5" fill="#ffffff"/>
+  
+  <!-- Little Heart Motif in Center Tier -->
+  <path d="M32 33 C32 31.8, 30.5 30.5, 29.5 31.5 C28.5 32.5, 30.5 34.5, 32 35.5 C33.5 34.5, 35.5 32.5, 34.5 31.5 C33.5 30.5, 32 31.8, 32 33 Z" fill="#e65100"/>
+</svg>

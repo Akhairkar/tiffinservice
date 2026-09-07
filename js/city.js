@@ -47,6 +47,7 @@ const CITY_STATE_MAP = {
  */
 const cityPage = {
   currentCity: "Nagpur",
+  hasCityParam: false,
   selectedLocality: "",
   activeDietFilters: new Set(),
   activePlanFilters: new Set(),
@@ -76,6 +77,7 @@ const cityPage = {
     const cityParam = params.get('city') || params.get('search');
     const prefParam = params.get('pref') || params.get('category');
 
+    this.hasCityParam = !!cityParam;
     if (cityParam) {
       // Find matching standard city name or use capitalized string
       const matched = Object.keys(CITY_LOCALITIES).find(
@@ -101,15 +103,28 @@ const cityPage = {
    */
   updateCityHeadings: function() {
     const city = this.currentCity;
+    const metaCanonical = document.getElementById('metaCanonical');
+    const ogUrl = document.getElementById('ogUrl');
+    const twitterUrl = document.getElementById('twitterUrl');
 
-    // Document Title & Meta
+    if (!this.hasCityParam) {
+      // Visiting generic city discovery page without query parameters
+      if (metaCanonical) metaCanonical.setAttribute('href', 'https://akhairkar.github.io/tiffinservice/city.html');
+      if (ogUrl) ogUrl.setAttribute('content', 'https://akhairkar.github.io/tiffinservice/city.html');
+      if (twitterUrl) twitterUrl.setAttribute('content', 'https://akhairkar.github.io/tiffinservice/city.html');
+      return;
+    }
+
+    // Document Title & Meta for specific city
     document.title = `Tiffin Services in ${city} | Homemade Food & Monthly Dabba Delivery`;
     const metaTitle = document.getElementById('metaPageTitle');
+    const metaPageTitleTag = document.getElementById('metaPageTitleTag');
     const metaDesc = document.getElementById('metaPageDesc');
     const ogTitle = document.getElementById('ogTitle');
     const ogDesc = document.getElementById('ogDesc');
 
     if (metaTitle) metaTitle.textContent = `Tiffin Services in ${city} | Homemade Food & Monthly Dabba Delivery`;
+    if (metaPageTitleTag) metaPageTitleTag.setAttribute('content', `Tiffin Services in ${city} | Homemade Food & Monthly Dabba Delivery`);
     if (metaDesc) metaDesc.setAttribute('content', `Find the best tiffin services in ${city}. Compare pure veg, Jain, and homemade daily and monthly meal plans with direct provider contact numbers.`);
     if (ogTitle) ogTitle.setAttribute('content', `Tiffin Services in ${city} | TiffinWale`);
     if (ogDesc) ogDesc.setAttribute('content', `Find the best tiffin services in ${city}. Compare pure veg, Jain, and homemade meal plans.`);
@@ -118,9 +133,6 @@ const cityPage = {
     const cityMeta = CITY_STATE_MAP[city];
     const metaGeoRegion = document.getElementById('metaGeoRegion');
     const metaGeoPlace = document.getElementById('metaGeoPlace');
-    const metaCanonical = document.getElementById('metaCanonical');
-    const ogUrl = document.getElementById('ogUrl');
-    const twitterUrl = document.getElementById('twitterUrl');
     const twitterTitle = document.getElementById('twitterTitle');
     const twitterDesc = document.getElementById('twitterDesc');
 
@@ -144,9 +156,27 @@ const cityPage = {
         const schema = JSON.parse(jsonLdEl.textContent);
         if (schema && schema['@graph']) {
           const breadcrumbs = schema['@graph'].find(item => item['@type'] === 'BreadcrumbList');
-          if (breadcrumbs && breadcrumbs.itemListElement && breadcrumbs.itemListElement[2]) {
-            breadcrumbs.itemListElement[2].name = `${city} Tiffin Services`;
-            breadcrumbs.itemListElement[2].item = canonicalUrl;
+          if (breadcrumbs) {
+            breadcrumbs.itemListElement = [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://akhairkar.github.io/tiffinservice/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Cities",
+                "item": "https://akhairkar.github.io/tiffinservice/city.html"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": `${city} Tiffin Services`,
+                "item": canonicalUrl
+              }
+            ];
           }
           const colPage = schema['@graph'].find(item => item['@type'] === 'CollectionPage');
           if (colPage) {

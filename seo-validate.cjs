@@ -1,7 +1,8 @@
 /**
  * TiffinWale - Comprehensive Deep SEO & Technical Audit Test Suite
  * Validates XML Sitemaps, Robots, HTML Meta, OpenGraph, Twitter, Headings,
- * JSON-LD Schemas, Image/SVG Accessibility, and Internal Link Integrity.
+ * JSON-LD Schemas, Image/SVG Accessibility, Internal Link Integrity,
+ * Schema @id Anchor Resolution, and Dynamic Routing/Canonical Logic.
  */
 
 const fs = require('fs');
@@ -55,8 +56,13 @@ const lastmods = Array.from(sitemapContent.matchAll(/<lastmod>(.*?)<\/lastmod>/g
 const allToday = lastmods.every(date => date === '2026-09-07');
 assert(allToday, 'All sitemap lastmod dates are updated to 2026-09-07');
 
-// 3. HTML Pages Validation
-console.log('\n--- 3. Checking HTML Files (Meta, OpenGraph, JSON-LD, Headings) ---');
+// 3. Static Assets Validation
+console.log('\n--- 3. Checking Static Assets (Icons & Preview Images) ---');
+assert(fs.existsSync('favicon.svg'), 'favicon.svg exists in repository');
+assert(fs.existsSync('city_preview.png'), 'city_preview.png exists in repository');
+
+// 4. HTML Pages Validation
+console.log('\n--- 4. Checking HTML Files (Meta, OpenGraph, Twitter, JSON-LD, Headings) ---');
 const htmlFiles = fs.readdirSync('.').filter(f => f.endsWith('.html'));
 
 const allFileIds = new Map();
@@ -69,6 +75,9 @@ for (const file of htmlFiles) {
 for (const file of htmlFiles) {
   console.log(`\nEvaluating: ${file}`);
   const content = fs.readFileSync(file, 'utf8');
+
+  // Favicon check
+  assert(/<link\s+rel=["']icon["'][^>]*href=["']favicon\.svg["']/i.test(content), `${file} has SVG favicon declared`);
 
   // Title check
   const titleMatch = content.match(/<title[^>]*>(.*?)<\/title>/i);
@@ -86,14 +95,19 @@ for (const file of htmlFiles) {
   assert(/<meta\s+name=["']geo\.region["']/i.test(content), `${file} has geo.region meta tag`);
   assert(/<meta\s+name=["']geo\.placename["']/i.test(content), `${file} has geo.placename meta tag`);
 
-  // OpenGraph & Twitter
+  // OpenGraph
   assert(/<meta\s+property=["']og:image["']/i.test(content), `${file} has og:image meta tag`);
-  assert(/<meta\s+property=["']twitter:image["']|<meta\s+name=["']twitter:image["']/i.test(content), `${file} has twitter:image meta tag`);
-  assert(/<meta\s+property=["']twitter:card["']|<meta\s+name=["']twitter:card["']/i.test(content), `${file} has twitter:card meta tag`);
+
+  // Standard Twitter tags (name="twitter:...")
+  assert(/<meta\s+name=["']twitter:card["']/i.test(content), `${file} has standard name="twitter:card" meta tag`);
+  assert(/<meta\s+name=["']twitter:image["']/i.test(content), `${file} has standard name="twitter:image" meta tag`);
 
   // Canonical tag
   const canonicalMatch = content.match(/<link\s+rel=["']canonical["'][^>]*href=["'](.*?)["']/i);
   assert(!!canonicalMatch && canonicalMatch[1].startsWith('https://akhairkar.github.io/tiffinservice/'), `${file} has proper canonical tag`);
+
+  // Footer copyright check
+  assert(content.includes('&copy; 2026 TiffinWale'), `${file} copyright year is 2026`);
 
   // City pages specific assertions
   if (file.startsWith('tiffin-service-')) {
@@ -133,26 +147,46 @@ for (const file of htmlFiles) {
     }
     assert(validJson, `${file} JSON-LD script parses as valid JSON`);
 
-    if (file.startsWith('tiffin-service-') && parsed) {
+    if (parsed) {
       const graph = parsed['@graph'] || [parsed];
-      const hasBreadcrumbs = graph.some(item => item['@type'] === 'BreadcrumbList');
-      const hasCollection = graph.some(item => item['@type'] === 'CollectionPage');
-      const lb = graph.find(item => item['@type'] === 'LocalBusiness');
-      const faq = graph.find(item => item['@type'] === 'FAQPage');
 
-      assert(hasBreadcrumbs, `${file} JSON-LD includes BreadcrumbList`);
-      assert(hasCollection, `${file} JSON-LD includes CollectionPage`);
-      assert(!!lb, `${file} JSON-LD includes LocalBusiness`);
-      assert(!!faq, `${file} JSON-LD includes FAQPage`);
-
-      if (lb) {
-        assert(!!lb.priceRange, `${file} LocalBusiness includes priceRange`);
-        assert(!!lb.servesCuisine, `${file} LocalBusiness includes servesCuisine`);
-        assert(!!lb.openingHoursSpecification || !!lb.openingHours, `${file} LocalBusiness includes openingHours`);
+      // Verify schema @id references resolve to elements in this page if fragment is used
+      for (const item of graph) {
+        if (item['@id'] && item['@id'].includes('#')) {
+          const fragment = item['@id'].split('#')[1];
+          if (fragment) {
+            assert(allFileIds.get(file).has(fragment), `${file} JSON-LD @id fragment #${fragment} exists in HTML DOM`);
+          }
+        }
       }
 
-      if (faq) {
-        assert(Array.isArray(faq.mainEntity) && faq.mainEntity.length >= 4, `${file} FAQPage includes at least 4 questions & answers`);
+      // Check organization logo if present
+      const org = graph.find(item => item['@type'] === 'Organization');
+      if (org && org.logo) {
+        const logoPath = org.logo.replace('https://akhairkar.github.io/tiffinservice/', '');
+        assert(fs.existsSync(logoPath), `${file} Organization logo file (${logoPath}) exists on disk`);
+      }
+
+      if (file.startsWith('tiffin-service-')) {
+        const hasBreadcrumbs = graph.some(item => item['@type'] === 'BreadcrumbList');
+        const hasCollection = graph.some(item => item['@type'] === 'CollectionPage');
+        const lb = graph.find(item => item['@type'] === 'LocalBusiness');
+        const faq = graph.find(item => item['@type'] === 'FAQPage');
+
+        assert(hasBreadcrumbs, `${file} JSON-LD includes BreadcrumbList`);
+        assert(hasCollection, `${file} JSON-LD includes CollectionPage`);
+        assert(!!lb, `${file} JSON-LD includes LocalBusiness`);
+        assert(!!faq, `${file} JSON-LD includes FAQPage`);
+
+        if (lb) {
+          assert(!!lb.priceRange, `${file} LocalBusiness includes priceRange`);
+          assert(!!lb.servesCuisine, `${file} LocalBusiness includes servesCuisine`);
+          assert(!!lb.openingHoursSpecification || !!lb.openingHours, `${file} LocalBusiness includes openingHours`);
+        }
+
+        if (faq) {
+          assert(Array.isArray(faq.mainEntity) && faq.mainEntity.length >= 4, `${file} FAQPage includes at least 4 questions & answers`);
+        }
       }
     }
   }
@@ -213,6 +247,13 @@ for (const file of htmlFiles) {
   }
   assert(fileLinksValid, `${file} all internal links and anchors are 100% valid`);
 }
+
+// 5. JavaScript Logic & Canonical Integrity
+console.log('\n--- 5. Checking Dynamic JS Routing & Canonical Integrity ---');
+const cityJsContent = fs.readFileSync(path.join('js', 'city.js'), 'utf8');
+assert(cityJsContent.includes('hasCityParam'), 'city.js tracks URL city parameter existence');
+assert(cityJsContent.includes("if (!this.hasCityParam)"), 'city.js guards against canonical hijacking on base city.html');
+assert(cityJsContent.includes("'https://akhairkar.github.io/tiffinservice/city.html'"), 'city.js preserves canonical city.html when no param given');
 
 console.log('\n====================================================');
 console.log(` AUDIT COMPLETE: ${passedTests} passed, ${failedTests} failed, ${totalTests} total tests`);
