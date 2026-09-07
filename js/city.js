@@ -25,6 +25,24 @@ const CITY_LOCALITIES = {
 };
 
 /**
+ * City-State Code and Static Page Mapping
+ */
+const CITY_STATE_MAP = {
+  "Mumbai": { stateCode: "IN-MH", slug: "mumbai" },
+  "Pune": { stateCode: "IN-MH", slug: "pune" },
+  "Delhi": { stateCode: "IN-DL", slug: "delhi" },
+  "Bengaluru": { stateCode: "IN-KA", slug: "bengaluru" },
+  "Nagpur": { stateCode: "IN-MH", slug: "nagpur" },
+  "Ahmedabad": { stateCode: "IN-GJ", slug: "ahmedabad" },
+  "Hyderabad": { stateCode: "IN-TG", slug: "hyderabad" },
+  "Chennai": { stateCode: "IN-TN", slug: "chennai" },
+  "Kolkata": { stateCode: "IN-WB", slug: "kolkata" },
+  "Jaipur": { stateCode: "IN-RJ", slug: "jaipur" },
+  "Surat": { stateCode: "IN-GJ", slug: "surat" },
+  "Indore": { stateCode: "IN-MP", slug: "indore" }
+};
+
+/**
  * City Page Controller Object
  */
 const cityPage = {
@@ -95,6 +113,53 @@ const cityPage = {
     if (metaDesc) metaDesc.setAttribute('content', `Find the best tiffin services in ${city}. Compare pure veg, Jain, and homemade daily and monthly meal plans with direct provider contact numbers.`);
     if (ogTitle) ogTitle.setAttribute('content', `Tiffin Services in ${city} | TiffinWale`);
     if (ogDesc) ogDesc.setAttribute('content', `Find the best tiffin services in ${city}. Compare pure veg, Jain, and homemade meal plans.`);
+
+    // Canonical & Geo Tags Dynamic Updating
+    const cityMeta = CITY_STATE_MAP[city];
+    const metaGeoRegion = document.getElementById('metaGeoRegion');
+    const metaGeoPlace = document.getElementById('metaGeoPlace');
+    const metaCanonical = document.getElementById('metaCanonical');
+    const ogUrl = document.getElementById('ogUrl');
+    const twitterUrl = document.getElementById('twitterUrl');
+    const twitterTitle = document.getElementById('twitterTitle');
+    const twitterDesc = document.getElementById('twitterDesc');
+
+    if (cityMeta && metaGeoRegion) metaGeoRegion.setAttribute('content', cityMeta.stateCode);
+    if (metaGeoPlace) metaGeoPlace.setAttribute('content', city);
+
+    let canonicalUrl = `https://akhairkar.github.io/tiffinservice/city.html?city=${encodeURIComponent(city)}`;
+    if (cityMeta && cityMeta.slug) {
+      canonicalUrl = `https://akhairkar.github.io/tiffinservice/tiffin-service-${cityMeta.slug}.html`;
+    }
+    if (metaCanonical) metaCanonical.setAttribute('href', canonicalUrl);
+    if (ogUrl) ogUrl.setAttribute('content', canonicalUrl);
+    if (twitterUrl) twitterUrl.setAttribute('content', canonicalUrl);
+    if (twitterTitle) twitterTitle.setAttribute('content', `Tiffin Services in ${city} | TiffinWale`);
+    if (twitterDesc) twitterDesc.setAttribute('content', `Find the best tiffin services in ${city}. Compare pure veg, Jain, and homemade meal plans.`);
+
+    // Structured Data JSON-LD Dynamic Updating
+    const jsonLdEl = document.getElementById('cityJsonLd');
+    if (jsonLdEl) {
+      try {
+        const schema = JSON.parse(jsonLdEl.textContent);
+        if (schema && schema['@graph']) {
+          const breadcrumbs = schema['@graph'].find(item => item['@type'] === 'BreadcrumbList');
+          if (breadcrumbs && breadcrumbs.itemListElement && breadcrumbs.itemListElement[2]) {
+            breadcrumbs.itemListElement[2].name = `${city} Tiffin Services`;
+            breadcrumbs.itemListElement[2].item = canonicalUrl;
+          }
+          const colPage = schema['@graph'].find(item => item['@type'] === 'CollectionPage');
+          if (colPage) {
+            colPage.name = `Tiffin Services in ${city}`;
+            colPage.description = `Directory of verified home chefs and tiffin services in ${city} providing homemade daily and monthly meals.`;
+            colPage.url = canonicalUrl;
+          }
+          jsonLdEl.textContent = JSON.stringify(schema, null, 2);
+        }
+      } catch (e) {
+        // Fallback gracefully
+      }
+    }
 
     // Breadcrumb & Headings
     const breadcrumbCity = document.getElementById('breadcrumbCity');

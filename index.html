@@ -13,6 +13,9 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#e65100">
   <link rel="canonical" href="https://akhairkar.github.io/tiffinservice/">
+  <meta name="author" content="TiffinWale">
+  <meta name="geo.region" content="IN">
+  <meta name="geo.placename" content="India">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -21,12 +24,14 @@
   <meta property="og:description" content="Find tiffin services near you across India. Discover homemade, veg, Jain, daily and monthly tiffin providers and contact local kitchens directly.">
   <meta property="og:site_name" content="TiffinWale">
   <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://akhairkar.github.io/tiffinservice/city_preview.png">
 
   <!-- Twitter / X -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://akhairkar.github.io/tiffinservice/">
   <meta property="twitter:title" content="Tiffin Service Near Me | Find Homemade Food & Tiffin Services in India">
   <meta property="twitter:description" content="Find tiffin services near you across India. Discover homemade, veg, Jain, daily and monthly tiffin providers and contact local kitchens directly.">
+  <meta property="twitter:image" content="https://akhairkar.github.io/tiffinservice/city_preview.png">
 
   <!-- Modern CSS Best Practices: Text wrap balance & typography -->
   <style>
@@ -71,9 +76,16 @@
         "url": "https://akhairkar.github.io/tiffinservice/",
         "logo": "https://akhairkar.github.io/tiffinservice/favicon.ico",
         "description": "Discover homemade, affordable, and reliable tiffin services in your city.",
+        "foundingDate": "2024",
         "areaServed": {
           "@type": "Country",
           "name": "India"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "availableLanguage": ["English", "Hindi"],
+          "areaServed": "IN"
         }
       },
       {
@@ -157,6 +169,27 @@
               "text": "Yes, our directory highlights independent home chefs and family-operated kitchens who prepare fresh, hygienic, ghar-ka-khana style meals with balanced spices and low oil."
             }
           }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://akhairkar.github.io/tiffinservice/#citylist",
+        "name": "Tiffin Services by City in India",
+        "description": "Find homemade tiffin services in major Indian cities",
+        "numberOfItems": 12,
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Tiffin Service in Mumbai","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-mumbai.html"},
+          {"@type":"ListItem","position":2,"name":"Tiffin Service in Delhi","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-delhi.html"},
+          {"@type":"ListItem","position":3,"name":"Tiffin Service in Pune","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-pune.html"},
+          {"@type":"ListItem","position":4,"name":"Tiffin Service in Bengaluru","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-bengaluru.html"},
+          {"@type":"ListItem","position":5,"name":"Tiffin Service in Hyderabad","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-hyderabad.html"},
+          {"@type":"ListItem","position":6,"name":"Tiffin Service in Chennai","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-chennai.html"},
+          {"@type":"ListItem","position":7,"name":"Tiffin Service in Ahmedabad","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-ahmedabad.html"},
+          {"@type":"ListItem","position":8,"name":"Tiffin Service in Nagpur","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-nagpur.html"},
+          {"@type":"ListItem","position":9,"name":"Tiffin Service in Kolkata","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-kolkata.html"},
+          {"@type":"ListItem","position":10,"name":"Tiffin Service in Jaipur","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-jaipur.html"},
+          {"@type":"ListItem","position":11,"name":"Tiffin Service in Surat","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-surat.html"},
+          {"@type":"ListItem","position":12,"name":"Tiffin Service in Indore","url":"https://akhairkar.github.io/tiffinservice/tiffin-service-indore.html"}
         ]
       }
     ]
@@ -356,7 +389,7 @@
           <div class="col-lg-5 d-none d-lg-block">
             <div class="hero-visual-card">
               <!-- High-Tech SVG Indian Thali & Tiffin Illustration -->
-              <svg class="hero-art-svg" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fresh Indian Tiffin Dabba and Homemade Thali Illustration">
+              <svg class="hero-art-svg" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fresh Indian Tiffin Dabba and Homemade Thali Illustration" fetchpriority="high">
                 <circle cx="250" cy="210" r="180" fill="#FFF8F0" stroke="#FED7AA" stroke-width="2"/>
                 <!-- Outer Plate / Thali -->
                 <circle cx="250" cy="210" r="150" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="6"/>
@@ -626,6 +659,36 @@
           <button type="button" class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#allCitiesModal">
             <i class="bi bi-grid-3x3-gap me-1" aria-hidden="true"></i> View All Cities in India
           </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         POPULAR SEARCHES (Long-tail Keyword Section)
+         ====================================================================== -->
+    <section class="py-4 bg-light border-top border-bottom" id="popularSearchesSection" aria-label="Popular Tiffin Searches">
+      <div class="container-xl">
+        <div class="section-header text-center mb-3">
+          <h2 class="h5 fw-bold text-muted mb-1"><i class="bi bi-search me-1" aria-hidden="true"></i> Popular Searches</h2>
+          <p class="small text-muted mb-0">Trending tiffin service queries across India</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+          <a href="tiffin-service-mumbai.html" class="btn btn-outline-secondary btn-sm">Monthly Tiffin Service Mumbai</a>
+          <a href="tiffin-service-delhi.html" class="btn btn-outline-secondary btn-sm">Student Tiffin Delhi</a>
+          <a href="tiffin-service-bengaluru.html" class="btn btn-outline-secondary btn-sm">Office Tiffin Bangalore</a>
+          <a href="tiffin-service-ahmedabad.html" class="btn btn-outline-secondary btn-sm">Jain Tiffin Ahmedabad</a>
+          <a href="tiffin-service-pune.html" class="btn btn-outline-secondary btn-sm">Homemade Food Delivery Pune</a>
+          <a href="tiffin-service-hyderabad.html" class="btn btn-outline-secondary btn-sm">Veg Tiffin Hyderabad</a>
+          <a href="tiffin-service-chennai.html" class="btn btn-outline-secondary btn-sm">Tiffin Service Chennai</a>
+          <a href="tiffin-service-kolkata.html" class="btn btn-outline-secondary btn-sm">Daily Tiffin Kolkata</a>
+          <a href="tiffin-service-nagpur.html" class="btn btn-outline-secondary btn-sm">Monthly Dabba Nagpur</a>
+          <a href="tiffin-service-jaipur.html" class="btn btn-outline-secondary btn-sm">Ghar Ka Khana Jaipur</a>
+          <a href="tiffin-service-surat.html" class="btn btn-outline-secondary btn-sm">Tiffin Near Me Surat</a>
+          <a href="tiffin-service-indore.html" class="btn btn-outline-secondary btn-sm">Homemade Tiffin Indore</a>
+          <a href="#searchSection" class="btn btn-outline-secondary btn-sm">Tiffin Service Near Me</a>
+          <a href="#preferencesSection" class="btn btn-outline-secondary btn-sm">Veg Tiffin Service</a>
+          <a href="#preferencesSection" class="btn btn-outline-secondary btn-sm">Jain Tiffin Service</a>
+          <a href="#preferencesSection" class="btn btn-outline-secondary btn-sm">Monthly Tiffin Subscription</a>
         </div>
       </div>
     </section>
@@ -1208,6 +1271,7 @@
     <!-- ======================================================================
          CUSTOMER LEAD GENERATION CTA
          ====================================================================== -->
+    <div id="leadForm"></div>
     <section class="section-padding lead-section" id="leadSection" aria-label="Customer Tiffin Requirement Form">
       <div class="container-xl">
         <div class="row justify-content-center">
@@ -1310,6 +1374,7 @@
     <!-- ======================================================================
          BUSINESS OWNER CTA & FUTURE PREMIUM MODEL
          ====================================================================== -->
+    <div id="listBusinessSection"></div>
     <section class="section-padding business-cta-section" id="businessSection" aria-label="For Tiffin Service Businesses">
       <div class="container-xl">
         <div class="row align-items-center g-5">
@@ -1564,22 +1629,22 @@
 
         <div class="row g-2 g-md-3 row-cols-2 row-cols-sm-3 row-cols-md-4">
           <!-- 16 States/UTs -->
-          <div class="col"><a href="#state-maharashtra" class="state-pill text-decoration-none" data-state="Maharashtra"><span>Maharashtra</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-delhi" class="state-pill text-decoration-none" data-state="Delhi"><span>Delhi NCR</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-karnataka" class="state-pill text-decoration-none" data-state="Karnataka"><span>Karnataka</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-gujarat" class="state-pill text-decoration-none" data-state="Gujarat"><span>Gujarat</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-tamil-nadu" class="state-pill text-decoration-none" data-state="Tamil Nadu"><span>Tamil Nadu</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-telangana" class="state-pill text-decoration-none" data-state="Telangana"><span>Telangana</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-rajasthan" class="state-pill text-decoration-none" data-state="Rajasthan"><span>Rajasthan</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-madhya-pradesh" class="state-pill text-decoration-none" data-state="Madhya Pradesh"><span>Madhya Pradesh</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-uttar-pradesh" class="state-pill text-decoration-none" data-state="Uttar Pradesh"><span>Uttar Pradesh</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-west-bengal" class="state-pill text-decoration-none" data-state="West Bengal"><span>West Bengal</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-kerala" class="state-pill text-decoration-none" data-state="Kerala"><span>Kerala</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-bihar" class="state-pill text-decoration-none" data-state="Bihar"><span>Bihar</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-odisha" class="state-pill text-decoration-none" data-state="Odisha"><span>Odisha</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-punjab" class="state-pill text-decoration-none" data-state="Punjab"><span>Punjab</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-haryana" class="state-pill text-decoration-none" data-state="Haryana"><span>Haryana</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
-          <div class="col"><a href="#state-goa" class="state-pill text-decoration-none" data-state="Goa"><span>Goa</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Maharashtra"><span>Maharashtra</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Delhi"><span>Delhi NCR</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Karnataka"><span>Karnataka</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Gujarat"><span>Gujarat</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Tamil Nadu"><span>Tamil Nadu</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Telangana"><span>Telangana</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Rajasthan"><span>Rajasthan</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Madhya Pradesh"><span>Madhya Pradesh</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Uttar Pradesh"><span>Uttar Pradesh</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="West Bengal"><span>West Bengal</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Kerala"><span>Kerala</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Bihar"><span>Bihar</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Odisha"><span>Odisha</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Punjab"><span>Punjab</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Haryana"><span>Haryana</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
+          <div class="col"><a href="#popularProvidersSection" class="state-pill text-decoration-none" data-state="Goa"><span>Goa</span><i class="bi bi-chevron-right text-muted small"></i></a></div>
         </div>
 
         <div class="text-center mt-4 pt-2">
@@ -1631,10 +1696,10 @@
             India's dedicated discovery platform for homemade tiffin services, pure veg & Jain meals, student dabba services, and corporate lunch solutions.
           </p>
           <div class="d-flex gap-2">
-            <a href="#social-facebook" class="social-icon-btn" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#social-instagram" class="social-icon-btn" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#social-whatsapp" class="social-icon-btn" aria-label="WhatsApp Community" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-            <a href="#social-twitter" class="social-icon-btn" aria-label="Twitter X" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://chat.whatsapp.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp Community" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Twitter X" title="Twitter"><i class="bi bi-twitter-x"></i></a>
           </div>
         </div>
 
@@ -1706,6 +1771,12 @@
         </div>
       </div>
     </div>
+  
+    <!-- Company & Legal Anchor Targets -->
+    <div id="about" class="visually-hidden" aria-hidden="true"></div>
+    <div id="contact" class="visually-hidden" aria-hidden="true"></div>
+    <div id="privacy" class="visually-hidden" aria-hidden="true"></div>
+    <div id="terms" class="visually-hidden" aria-hidden="true"></div>
   </footer>
 
   <!-- ======================================================================
