@@ -273,7 +273,9 @@ const app = {
         targetSection.scrollIntoView({ behavior: 'smooth' });
       }
 
-      this.showLocationFeedback(`Showing tiffin services delivering in "${query}". <a href="city.html?city=${encodeURIComponent(query)}" class="btn btn-primary-custom btn-sm ms-2 py-1 px-3" style="font-size: 0.78rem;">Explore Full ${query} Directory & Filters →</a>`, "success");
+      const STATIC_CITY_PAGES = { 'Mumbai': 'tiffin-service-mumbai.html', 'Pune': 'tiffin-service-pune.html', 'Delhi': 'tiffin-service-delhi.html', 'Bengaluru': 'tiffin-service-bengaluru.html', 'Nagpur': 'tiffin-service-nagpur.html', 'Ahmedabad': 'tiffin-service-ahmedabad.html', 'Hyderabad': 'tiffin-service-hyderabad.html', 'Chennai': 'tiffin-service-chennai.html', 'Kolkata': 'tiffin-service-kolkata.html', 'Jaipur': 'tiffin-service-jaipur.html', 'Surat': 'tiffin-service-surat.html', 'Indore': 'tiffin-service-indore.html' };
+      const cityPageUrl = STATIC_CITY_PAGES[query] || `city.html?city=${encodeURIComponent(query)}`;
+      this.showLocationFeedback(`Showing tiffin services delivering in "${query}". <a href="${cityPageUrl}" class="btn btn-primary-custom btn-sm ms-2 py-1 px-3" style="font-size: 0.78rem;">Explore Full ${query} Directory &amp; Filters →</a>`, "success");
     });
 
     // Clear feedback when typing
@@ -910,7 +912,22 @@ const app = {
       const modal = bootstrap.Modal.getInstance(modalEl);
       if (modal) modal.hide();
     }
-    window.location.href = `city.html?city=${encodeURIComponent(city)}`;
+    // Navigate to static city page for top 12 cities, else dynamic fallback
+    const STATIC_CITY_PAGES = {
+      'Mumbai': 'tiffin-service-mumbai.html',
+      'Pune': 'tiffin-service-pune.html',
+      'Delhi': 'tiffin-service-delhi.html',
+      'Bengaluru': 'tiffin-service-bengaluru.html',
+      'Nagpur': 'tiffin-service-nagpur.html',
+      'Ahmedabad': 'tiffin-service-ahmedabad.html',
+      'Hyderabad': 'tiffin-service-hyderabad.html',
+      'Chennai': 'tiffin-service-chennai.html',
+      'Kolkata': 'tiffin-service-kolkata.html',
+      'Jaipur': 'tiffin-service-jaipur.html',
+      'Surat': 'tiffin-service-surat.html',
+      'Indore': 'tiffin-service-indore.html'
+    };
+    window.location.href = STATIC_CITY_PAGES[city] || `city.html?city=${encodeURIComponent(city)}`;
   },
 
   /**

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://akhairkar.github.io/tiffinservice/sitemap.xml
+
+# Block unnecessary files
+Disallow: /node_modules/
